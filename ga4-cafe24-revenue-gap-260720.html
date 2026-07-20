@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>바니스뉴욕뷰티 소재별 성과 리포트 — 2025-2026 GA4-카페24 매출 비교진단</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f6f7fb;
+      color: #1f2937;
+    }
+    .card {
+      width: min(420px, calc(100vw - 32px));
+      padding: 28px;
+      border-radius: 18px;
+      background: #fff;
+      box-shadow: 0 18px 50px rgba(15, 23, 42, .12);
+    }
+    h1 { margin: 0 0 8px; font-size: 22px; }
+    p { margin: 0 0 22px; color: #6b7280; line-height: 1.5; }
+    label { display: block; margin: 14px 0 6px; font-size: 13px; font-weight: 700; }
+    input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      font-size: 15px;
+    }
+    button {
+      width: 100%;
+      margin-top: 18px;
+      padding: 13px 14px;
+      border: 0;
+      border-radius: 10px;
+      background: #111827;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .error { min-height: 20px; margin-top: 12px; color: #dc2626; font-size: 13px; }
+    .hint { margin-top: 14px; font-size: 12px; color: #9ca3af; }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>바니스뉴욕뷰티 소재별 성과 리포트 — 2025-2026 GA4-카페24 매출 비교진단</h1>
+    <p>보호된 소재 성과 리포트입니다. 아이디와 비밀번호를 입력하면 리포트가 열립니다.</p>
+    <form id="login">
+      <label for="username">아이디</label>
+      <input id="username" name="username" autocomplete="username" required>
+      <label for="password">비밀번호</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" required>
+      <button type="submit">리포트 열기</button>
+      <div id="error" class="error"></div>
+      <div class="hint">이 파일은 AES-GCM으로 암호화되어 있습니다.</div>
+    </form>
+  </main>
+  <script>
+    const payload = {"salt":"+I6q2DeGCNu8VCyR+UMC3w==","nonce":"acNVWUum5M/7cH03","ciphertext":"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","iterations":250000,"usernameSalt":"c/LLi42PNL7ljuft8fEy0w==","usernameHash":"9aaf21fc3e87b0241aec0258b761a968a934c6c5edd099ffe07bd4c14bd8e6f1"};
+
+    function b64ToBytes(value) {
+      const binary = atob(value);
+      const bytes = new Uint8Array(binary.length);
+      for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+      return bytes;
+    }
+
+    async function sha256Hex(text) {
+      const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+      return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, "0")).join("");
+    }
+
+    async function deriveKey(password) {
+      const baseKey = await crypto.subtle.importKey(
+        "raw",
+        new TextEncoder().encode(password),
+        "PBKDF2",
+        false,
+        ["deriveKey"]
+      );
+      return crypto.subtle.deriveKey(
+        {
+          name: "PBKDF2",
+          salt: b64ToBytes(payload.salt),
+          iterations: payload.iterations,
+          hash: "SHA-256"
+        },
+        baseKey,
+        { name: "AES-GCM", length: 256 },
+        false,
+        ["decrypt"]
+      );
+    }
+
+    document.getElementById("login").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const error = document.getElementById("error");
+      error.textContent = "";
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value;
+      try {
+        const usernameHash = await sha256Hex(username + ":" + payload.usernameSalt);
+        if (usernameHash !== payload.usernameHash) throw new Error("bad username");
+        const key = await deriveKey(password);
+        const compressed = await crypto.subtle.decrypt(
+          { name: "AES-GCM", iv: b64ToBytes(payload.nonce) },
+          key,
+          b64ToBytes(payload.ciphertext)
+        );
+        const stream = new Response(new Blob([compressed]).stream().pipeThrough(new DecompressionStream("deflate")));
+        const reportHtml = await stream.text();
+        document.open();
+        document.write(reportHtml);
+        document.close();
+      } catch (err) {
+        error.textContent = "아이디 또는 비밀번호가 올바르지 않습니다.";
+      }
+    });
+  </script>
+</body>
+</html>
